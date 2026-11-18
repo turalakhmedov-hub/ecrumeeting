@@ -34,7 +34,8 @@ async function db(path, opts = {}) {
     throw new Error('Database error: ' + r.status);
   }
 
-  return r.status === 204 ? null : r.json();
+  const body = await r.text();
+return body ? JSON.parse(body) : null;
 }
 
 module.exports = { db, respond };
